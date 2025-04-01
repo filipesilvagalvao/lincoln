@@ -3,6 +3,7 @@ const sliders = document.querySelectorAll('.slider');
 sliders.forEach(slider => {
     slider.addEventListener('input', function (e) {
         e.stopPropagation(); // Para evitar que o evento clique seja disparado
+
         // Agora pegamos o contêiner correto onde o slider está
         const container = e.target.closest('.image-container'); 
 
@@ -18,7 +19,8 @@ sliders.forEach(slider => {
 const accordions = document.querySelectorAll('.faq-accordion');
 
 accordions.forEach(accordion => {
-    accordion.addEventListener('click', function () {
+    accordion.addEventListener('click', function (e) {
+        e.stopPropagation(); // Para evitar que o evento clique seja disparado
         const body = accordion.querySelector('.accordion-body');
 
         body.classList.toggle('active');
