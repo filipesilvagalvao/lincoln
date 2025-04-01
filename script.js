@@ -2,10 +2,8 @@ const sliders = document.querySelectorAll('.slider');
 
 sliders.forEach(slider => {
     slider.addEventListener('input', function (e) {
-        e.stopPropagation(); // Para evitar que o evento clique seja disparado
-
-        // Agora pegamos o contêiner correto onde o slider está
         const container = e.target.closest('.image-container'); 
+        if (!container) return; // Evita erros se o container não for encontrado
 
         const beforeImage = container.querySelector('.before');
         const asterisk = container.querySelector('.fa-arrows-alt-h');
@@ -14,15 +12,17 @@ sliders.forEach(slider => {
         beforeImage.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
         asterisk.style.left = value + '%';
     });
+
+    // Garante que o slider esteja sempre interativo
+    slider.style.pointerEvents = 'auto';
+    slider.style.zIndex = '10'; // Garante que ele fique sobre os outros elementos
 });
 
 const accordions = document.querySelectorAll('.faq-accordion');
 
 accordions.forEach(accordion => {
     accordion.addEventListener('click', function (e) {
-        e.stopPropagation(); // Para evitar que o evento clique seja disparado
         const body = accordion.querySelector('.accordion-body');
-
         body.classList.toggle('active');
     });
-})
+});
